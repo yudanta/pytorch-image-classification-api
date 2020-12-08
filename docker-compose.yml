@@ -1,0 +1,16 @@
+version: "3"
+services:
+  genesis:
+    container_name: "genesis_imageapi"
+    build: .
+    volumes:
+      - .:/home/genesis/src
+    ports:
+      - 8000:8000
+    environment:
+      - TZ=Asia/Jakarta
+      - DEBIAN_FRONTEND=noninteractive
+      - FLASK_APP=/home/genesis/src/run.py
+      - FLASK_DEBUG=1
+      - ENV=devel
+    # command: flask run --host=0.0.0.0 --port=8080

@@ -1,0 +1,2 @@
+gunicorn --name 'Image Classification API' --user root --chdir /home/genesis/src --timeout 300 -b 0.0.0.0:8000 app:app -k gevent --worker-connections 5 --workers 1 --reload
+# gunicorn --name 'Image Classification API' --chdir ./ app:app -k gevent --worker-connections 101 --workers 1 --reload
