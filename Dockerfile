@@ -28,6 +28,6 @@ RUN pip install -r /home/${user}/src/requirements.txt
 
 EXPOSE 8000
 
-WORKDIR /home/${user}/src/
-# CMD ["sh", "/home/genesis/src/genesis-gunicorn.sh"]
-CMD gunicorn -b 0.0.0.0:8000 app:app --daemon
+# WORKDIR /home/${user}/src/
+CMD ["sh", "/home/genesis/src/genesis-gunicorn.sh"]
+# CMD ["gunicorn", "--chdir", "/home/genesis/src", "-b", "0.0.0.0:8000", "app:app", "--daemon", "--timeout", "600"]
