@@ -3,6 +3,9 @@ FROM python:3.7-slim
 RUN apt update 
 RUN apt -y upgrade 
 
+ADD requirements-docker.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
+
 # create user 
 ARG user=genesis
 ARG group=genesis
@@ -16,18 +19,15 @@ RUN mkdir /home/${user}/log
 
 # cp project files 
 ADD app/ /home/${user}/src/app/
-ADD requirements-docker.txt /home/${user}/src/requirements.txt
 ADD model_dir/ /home/${user}/src/model_dir
 ADD index_to_name.json /home/${user}/src/
 ADD genesis-gunicorn.sh /home/${user}/src/
 
-USER root
+# USER root
 
-RUN chmod +x /home/${user}/src/genesis-gunicorn.sh
-RUN pip install -r /home/${user}/src/requirements.txt
+# RUN chmod +x /home/${user}/src/genesis-gunicorn.sh
+
 
 EXPOSE 8000
 
-# WORKDIR /home/${user}/src/
 CMD ["sh", "/home/genesis/src/genesis-gunicorn.sh"]
-# CMD ["gunicorn", "--chdir", "/home/genesis/src", "-b", "0.0.0.0:8000", "app:app", "--daemon", "--timeout", "600"]
