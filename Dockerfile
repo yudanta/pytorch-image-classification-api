@@ -23,11 +23,6 @@ ADD model_dir/ /home/${user}/src/model_dir
 ADD index_to_name.json /home/${user}/src/
 ADD genesis-gunicorn.sh /home/${user}/src/
 
-# USER root
-
-# RUN chmod +x /home/${user}/src/genesis-gunicorn.sh
-
-
-EXPOSE 8000
+# EXPOSE 8000
 
 CMD ["sh", "/home/genesis/src/genesis-gunicorn.sh"]
